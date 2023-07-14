@@ -5,6 +5,7 @@ import SearchIcon from "./search.svg";
 
 const App = () => {
   const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const API_KEY = "AIzaSyCvT6QJLfyGKhOu-8FNbYxdByXbq52mdTM";
   const API_URL = "https://www.googleapis.com/books/v1/volumes?key=" + API_KEY;
@@ -30,9 +31,9 @@ const App = () => {
     for (const item of items) {
       const parsedBook = BookObject(
         item.volumeInfo.title,
-        item.volumeInfo.authors[0],
+        item.volumeInfo.authors ? item.volumeInfo.authors[0] : "",
         item.volumeInfo.publishedDate,
-        item.volumeInfo.imageLinks.thumbnail);
+        item.volumeInfo.imageLinks?.thumbnail);
       parsedItems.push(parsedBook);
     }
     console.log(parsedItems);
@@ -40,7 +41,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    searchBooks('harry potter');
+    searchBooks('happy place');
+    setSearchTerm('happy place');
   }, [])
 
 
@@ -51,13 +53,16 @@ const App = () => {
       <div className="search">
         <input
           placeholder="Search for books"
-          value="Harry Potter"
-          onChange={() => {}}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") searchBooks(searchTerm)
+          }}
         />
         <img
           src={SearchIcon}
           alt="search"
-          onClick={() => searchBooks('Harry Potter')}
+          onClick={() => searchBooks(searchTerm)}
         />
       </div>
 

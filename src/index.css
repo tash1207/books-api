@@ -6,3 +6,38 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.app {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4px;
+}
+
+.search {
+  align-items: center;
+  background: #abc;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  margin: 4px;
+  padding: 2px;
+  width: 70%;
+}
+
+.search input {
+  background: #abc;
+  border: none;
+  color: #123;
+  flex: 1;
+  font-size: 1.5rem;
+  outline: none;
+  padding: 4px;
+}
+
+.search img {
+  cursor: pointer;
+  height: 28px;
+  width: 28px;
+}
