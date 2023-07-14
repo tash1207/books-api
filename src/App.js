@@ -1,7 +1,80 @@
-function App() {
+import React, { useEffect, useState } from 'react';
+
+import Book from './Book.jsx'
+import SearchIcon from "./search.svg";
+
+const App = () => {
+  const [books, setBooks] = useState([]);
+
+  const API_KEY = "AIzaSyCvT6QJLfyGKhOu-8FNbYxdByXbq52mdTM";
+  const API_URL = "https://www.googleapis.com/books/v1/volumes?key=" + API_KEY;
+
+  const BookObject = (title, author, publishedDate, image) => {
+    return {
+      title,
+      author,
+      publishedDate,
+      image : image || '',
+    }
+  }
+
+  const searchBooks = async (title) => {
+    const response = await fetch(`${API_URL}&q=${title}`);
+    const data = await response.json();
+
+    setBooks(parseReturnedItems(data.items));
+  }
+
+  const parseReturnedItems = (items) => {
+    const parsedItems = [];
+    for (const item of items) {
+      const parsedBook = BookObject(
+        item.volumeInfo.title,
+        item.volumeInfo.authors[0],
+        item.volumeInfo.publishedDate,
+        item.volumeInfo.imageLinks.thumbnail);
+      parsedItems.push(parsedBook);
+    }
+    console.log(parsedItems);
+    return parsedItems;
+  }
+
+  useEffect(() => {
+    searchBooks('harry potter');
+  }, [])
+
+
   return (
-    <div className="App">
+    <div className="app">
       <h1>Books!</h1>
+
+      <div className="search">
+        <input
+          placeholder="Search for books"
+          value="Harry Potter"
+          onChange={() => {}}
+        />
+        <img
+          src={SearchIcon}
+          alt="search"
+          onClick={() => searchBooks('Harry Potter')}
+        />
+      </div>
+
+      {books?.length > 0
+        ? (
+          <div className="container">
+            {books.map((book, index) => (
+              <Book key={index} book={book} />
+            ))}
+          </div>
+          ) : (
+            <div className="empty">
+              <h2>No books found</h2>
+            </div>
+          )
+      }
+
     </div>
   );
 }
