@@ -38,7 +38,6 @@ const App = () => {
         item.volumeInfo.imageLinks?.thumbnail);
       parsedItems.push(parsedBook);
     }
-    console.log(parsedItems);
     return parsedItems;
   }
 

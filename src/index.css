@@ -74,12 +74,17 @@ body {
 }
 
 .book .bookTitle {
+  display: -webkit-box;
   font-size: 1.4em;
   font-weight: bold;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .book .bookAuthor {
   font-size: 1.1em;
+  line-height: 1.5em;
 }
 
 .book .bookDate {
