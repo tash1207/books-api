@@ -5,8 +5,9 @@ const Book = ({ book }) => {
     <div className="book">
       <img src={book.image ? book.image : 'https://via.placeholder.com/128'}></img>
       <div>
-        <h3>{book.title}</h3>
-        <span>{book.author}</span>
+        <div className="bookTitle">{book.title}</div>
+        <div className="bookAuthor">{book.author}</div>
+        <div className="bookDate">Published: {book.publishedDate}</div>
       </div>
     </div>
   );

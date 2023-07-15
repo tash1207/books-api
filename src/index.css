@@ -22,7 +22,7 @@ body {
   display: flex;
   justify-content: center;
   margin: 4px;
-  padding: 2px;
+  padding: 2px 4px;
   width: 70%;
 }
 
@@ -38,6 +38,50 @@ body {
 
 .search img {
   cursor: pointer;
-  height: 28px;
-  width: 28px;
+  height: 24px;
+  width: 24px;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.book {
+  align-items: center;
+  background-color: #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: center;
+  margin: 1.5rem;
+  padding: 8px;
+  position: relative;
+  width: 300px;
+}
+
+.book:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
+
+.book img {
+  margin-bottom: 8px;
+}
+
+.book .bookTitle {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.book .bookAuthor {
+  font-size: 1.1em;
+}
+
+.book .bookDate {
+  font-style: italic;
 }

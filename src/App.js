@@ -10,8 +10,9 @@ const App = () => {
   const API_KEY = "AIzaSyCvT6QJLfyGKhOu-8FNbYxdByXbq52mdTM";
   const API_URL = "https://www.googleapis.com/books/v1/volumes?key=" + API_KEY;
 
-  const BookObject = (title, author, publishedDate, image) => {
+  const BookObject = (id, title, author, publishedDate, image) => {
     return {
+      id,
       title,
       author,
       publishedDate,
@@ -23,13 +24,14 @@ const App = () => {
     const response = await fetch(`${API_URL}&q=${title}`);
     const data = await response.json();
 
-    setBooks(parseReturnedItems(data.items));
+    setBooks(parseReturnedItems(data.items || []));
   }
 
   const parseReturnedItems = (items) => {
     const parsedItems = [];
     for (const item of items) {
       const parsedBook = BookObject(
+        item.id,
         item.volumeInfo.title,
         item.volumeInfo.authors ? item.volumeInfo.authors[0] : "",
         item.volumeInfo.publishedDate,
@@ -69,8 +71,8 @@ const App = () => {
       {books?.length > 0
         ? (
           <div className="container">
-            {books.map((book, index) => (
-              <Book key={index} book={book} />
+            {books.map((book) => (
+              <Book key={book.id} book={book} />
             ))}
           </div>
           ) : (
